@@ -5,22 +5,23 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'How-to Series by Kresna',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/kresnasatya/how-to.kresna.me',
 			},
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
+					label: 'Home',
+					link: '/'
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Programming',
+					autogenerate: { directory: 'programming' }
 				},
+				{
+					label: 'Frameworks',
+					autogenerate: { directory: 'frameworks' },
+				}
 			],
 		}),
 	],
