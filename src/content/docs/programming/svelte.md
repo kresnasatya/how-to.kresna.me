@@ -2,4 +2,4 @@
 title: Svelte
 ---
 
-TBA.
+TBA
