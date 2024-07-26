@@ -1,0 +1,30 @@
+---
+title: Xcode
+---
+
+I can't believe that I can use Xcode for programming Swift and SwiftUI with MacBook Air M1 with 256GB storage and 8GB of RAM. I can't believe that this machine is strong enough to do that! Thanks Apple Silicon.
+
+## Error: No Signing certificate “Mac Development” found
+
+There's a case when you run a code sample from third party and you get error message below. Here's the example.
+
+> No signing certificate "Mac Development" found: No "Mac Development" signing certificate matching team ID "A93A5CM278" with a private key was found. 
+(in target 'Keyword Bubble' from project 'KeywordBubble')
+
+### How to solve it?
+
+1. Open your project in Xcode
+2. On the project navigator, click project name to show **Project and Targets.**
+3. Focus on **Targets** section.
+4. In **Targets > Build Settings > Signing**
+    1. Change value of **Code Signing Identity** to **Sign to run locally**
+    2. Change value of **Code Signing Style** to **Manual**
+    3. Change value of **Development Team** to **Personal** or **None**
+5. Try again and see if works!
+
+<img src="/images/xcode-build-settings-location.png" alt="Xcode Build Settings location" />
+
+
+
+
+

@@ -21,7 +21,11 @@ export default defineConfig({
 				{
 					label: 'Frameworks',
 					autogenerate: { directory: 'frameworks' },
-				}
+				},
+				{
+					label: 'Tools',
+					autogenerate: { directory: 'tools' },
+				},
 			],
 		}),
 	],
