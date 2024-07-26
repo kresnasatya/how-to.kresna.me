@@ -74,69 +74,76 @@ export default app
 
 Here's the code sample to load data and assets from `src/lib` in Svelte component.
 
-```svelte
-// src/lib/App.svelte
+<Tabs>
+    <TabItem label="App.svelte">
+    ```svelte
+    // src/lib/App.svelte
 
-<script>
-	import Icon from "./lib/components/Icon.svelte";
-	import Shoe from "./lib/components/Shoes.svelte";
-</script>
+    <script>
+        import Icon from "./lib/components/Icon.svelte";
+        import Shoe from "./lib/components/Shoes.svelte";
+    </script>
 
-<Icon name="shopping-bag"/>
-<Shoes/>
-```
+    <Icon name="shopping-bag"/>
+    <Shoes/>
+    ```
+    </TabItem>
+    <TabItem label="Icon.svelte">
+    ```svelte
+    // src/lib/components/Icon.svelte
 
-```svelte
-// src/lib/components/Icon.svelte
+    <script>
+        // ../assets/icons/shopping-bag.svg => /src/assets/icons/shopping-bag.svg
+        import ShoppingBagIcon from '../assets/icons/shopping-bag.svg?raw';
+        
+        const icons = {
+            'shopping-bag': ShoppingBagIcon,
+            // Store another icons here
+        };
+        
+        export let name;
+        export let width = '24';
+        export let height = '24';
+        export let strokeWidth = '2';
+    </script>
 
-<script>
-    // ../assets/icons/shopping-bag.svg => /src/assets/icons/shopping-bag.svg
-	import ShoppingBagIcon from '../assets/icons/shopping-bag.svg?raw';
-	
-	const icons = {
-	    'shopping-bag': ShoppingBagIcon,
-	    // Store another icons here
-	};
-	
-	export let name;
-	export let width = '24';
-	export let height = '24';
-	export let strokeWidth = '2';
-</script>
+    <div style="--width: {width}px; --height: {height}px; --stroke-width: {strokeWidth}">
+        {@html icons[name]}
+    </div>
 
-<div style="--width: {width}px; --height: {height}px; --stroke-width: {strokeWidth}">
-    {@html icons[name]}
-</div>
+    <style>
+        /* CSS modules */
+        div :global(svg) {
+            width: var(--width);
+            height: var(--height);
+            stroke-width: var(--stroke-width);
+        }
+    </style>
+    ```
+    </TabItem>
+    <TabItem label="Shoes.svelte">
+    ```svelte
+    // src/lib/components/Shoes.svelte
 
-<style>
-    /* CSS modules */
-	div :global(svg) {
-		width: var(--width);
-		height: var(--height);
-		stroke-width: var(--stroke-width);
-	}
-</style>
-```
-```svelte
-// src/lib/components/Shoes.svelte
+    <script>
+        // ../data => /src/lib/data.js
+        import SHOES from "../data";
+        
+        // import.meta.glob is a Vite feature.
+        const images = import.meta.glob(['../assets/images/**.jpg'], {
+            eager: true,
+            query: 'url',
+            import: 'default',
+        });
+    </script>
 
-<script>
-    // ../data => /src/lib/data.js
-	import SHOES from "../data";
-    
-    // import.meta.glob is a Vite feature.
-	const images = import.meta.glob(['../assets/images/**.jpg'], {
-		eager: true,
-		query: 'url',
-		import: 'default',
-	});
-</script>
-
-{#each Object.entries(SHOES) as [key, shoe], index (key)}
-    <h2>{shoe.name}</h2>
-    <img src={images[`../assets/images/${shoe.filename}`]} alt={shoe.name}>
-{/each}
-```
+    {#each Object.entries(SHOES) as [key, shoe], index (key)}
+        <h2>{shoe.name}</h2>
+        <img src={images[`../assets/images/${shoe.filename}`]} alt={shoe.name}>
+    {/each}
+    ```
+    </TabItem>
+</Tabs>
 
 - You may store assets like images or icons in in `public` directory.
 
