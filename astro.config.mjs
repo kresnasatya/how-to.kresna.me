@@ -5,9 +5,9 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'How-to Series by Kresna',
+			title: 'Learn Series by Kresna',
 			social: {
-				github: 'https://github.com/kresnasatya/how-to.kresna.me',
+				github: 'https://github.com/kresnasatya/learn.kresna.me',
 			},
 			sidebar: [
 				{
